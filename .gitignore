@@ -1,0 +1,13 @@
+# Java compiled files
+*.class
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.project/
+.classpath/
+
+# Temporary files
+*.tmp
+*.bak
