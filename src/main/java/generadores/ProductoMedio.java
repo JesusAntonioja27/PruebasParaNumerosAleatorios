@@ -1,4 +1,4 @@
-package src.generadores;
+package src.main.java.generadores;
 
 /**
  * Clase que encapsula el algoritmo de Producto Medio.

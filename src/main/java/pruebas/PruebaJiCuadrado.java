@@ -1,4 +1,4 @@
-package src.pruebas;
+package src.main.java.pruebas;
 
 /**
  * Clase que ejecuta la prueba de uniformidad Ji-Cuadrada.

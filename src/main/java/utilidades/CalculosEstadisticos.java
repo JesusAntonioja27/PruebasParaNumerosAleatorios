@@ -1,4 +1,4 @@
-package src.utilidades;
+package src.main.java.utilidades;
 
 /**
  * Clase auxiliar que contiene el método 'calcularJiCuadrada'
