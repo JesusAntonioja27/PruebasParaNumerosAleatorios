@@ -2,7 +2,7 @@ package principal;
 
 /**
  * Maneja la interfaz de usuario (consola).
- * Lee la opción del usuario, interactúa con el GestorExcel para obtener los
+ * Lee la opción del usuario, interactúa con el GestorCSV para obtener los
  * datos
  * (en ArrayLists o arreglos) y llama a la clase correspondiente.
  */
