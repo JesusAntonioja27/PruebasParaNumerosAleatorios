@@ -1,4 +1,4 @@
-package src.main.java.utilidades;
+package utilidades;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package src.main.java.principal;
+package principal;
 
 /**
  * Maneja la interfaz de usuario (consola).

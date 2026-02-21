@@ -1,4 +1,4 @@
-package src.main.java.generadores;
+package generadores;
 
 /**
  * Clase que encapsula el algoritmo Congruencial Multiplicativo.

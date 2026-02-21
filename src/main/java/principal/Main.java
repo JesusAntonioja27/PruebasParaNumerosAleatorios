@@ -1,4 +1,4 @@
-package src.main.java.principal;
+package principal;
 
 /**
  * Punto de entrada del programa.
