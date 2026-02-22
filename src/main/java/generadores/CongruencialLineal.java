@@ -30,7 +30,7 @@ public class CongruencialLineal {
         int axnc = a * x0 + c;
         int mod = axnc % m;
 
-        System.out.println(n + "\t \033[4m" + x0 + "\033[0m \t" + axnc + "\t\t\t " + mod);
+        System.out.println(n + "\t" + x0 + "\t" + axnc + "\t\t\t " + mod);
 
         int xn = mod;
         axnc = a * xn + c;
@@ -52,11 +52,9 @@ public class CongruencialLineal {
         axnc = a * xn + c;
         mod = axnc % m;
         periodo++;
-
-        System.out.println(n + "\t \033[4m" + xn + " \033[0m \t" + axnc + "\t\t\t " + mod);
+        System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t\t " + mod);
 
         System.out.println("\nEl periodo es: " + periodo);
-
     }
 
     /*
