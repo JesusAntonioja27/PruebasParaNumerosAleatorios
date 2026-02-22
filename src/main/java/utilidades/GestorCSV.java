@@ -32,7 +32,7 @@ public class GestorCSV {
                 primeraLinea = false;
             }
         } catch (IOException e) {
-            System.err.println("No se encontro el archivo en la rutaa: " + rutaDeArchivo);
+            System.err.println("No se encontro el archivo en la ruta: " + rutaDeArchivo);
             e.printStackTrace();
         }
 

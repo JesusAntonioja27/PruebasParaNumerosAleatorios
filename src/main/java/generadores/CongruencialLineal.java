@@ -1,5 +1,7 @@
 package generadores;
 
+import utilidades.GestorCSV;
+import java.util.List;
 import java.util.Scanner;
 /*Los generadores congruenciales lineales generan una serie de números pseudo - aleatorios
  de tal forma que se puede generar el siguiente a partir del ultimo número derivado, 
@@ -15,28 +17,45 @@ public class CongruencialLineal {
         Scanner scanner = new Scanner(System.in);
         // Implementación del algoritmo
 
-        System.out.print("Ingresa la semilla: ");
-        int x0 = scanner.nextInt();
-        System.out.print("Ingresa el multiplicador: ");
-        int a = scanner.nextInt();
-        System.out.print("Ingresa la constante aditiva: ");
-        int c = scanner.nextInt();
-        System.out.print("Ingresa el módulo: ");
-        int m = scanner.nextInt();
+        /*
+         * System.out.print("Ingresa la semilla: ");
+         * int x0 = scanner.nextInt();
+         * System.out.print("Ingresa el multiplicador: ");
+         * int a = scanner.nextInt();
+         * System.out.print("Ingresa la constante aditiva: ");
+         * int c = scanner.nextInt();
+         * System.out.print("Ingresa el módulo: ");
+         * int m = scanner.nextInt();
+         */
+
+        GestorCSV gestor = new GestorCSV();
+
+        String ruta = "PruebasParaNumerosAleatorios/datosParaPruebas/datos.csv";
+
+        List<Double> numeros = gestor.leerNumeros(ruta);
+        System.out.println("Se leyeron " + numeros.size() + " números.");
+        for (int i = 0; i < Math.min(5, numeros.size()); i++) {
+            System.out.println(numeros.get(i));
+        }
+
+        double x0 = numeros.get(0);
+        double a = numeros.get(1);
+        double c = numeros.get(2);
+        double m = numeros.get(3);
 
         System.out.println("\n n \t Xn \t a * Xn + c\t \t (a * Xn + c) mod m");
         System.out.println("[---------------------------------------------------------]");
-        int n = 0;
-        int axnc = a * x0 + c;
-        int mod = axnc % m;
+        double n = 0;
+        double axnc = a * x0 + c;
+        double mod = axnc % m;
 
         System.out.println(n + "\t" + x0 + "\t" + axnc + "\t\t\t " + mod);
 
-        int xn = mod;
+        double xn = mod;
         axnc = a * xn + c;
         mod = axnc % m;
 
-        int periodo = 1;
+        double periodo = 1;
 
         while (mod != x0) {
             n++;
