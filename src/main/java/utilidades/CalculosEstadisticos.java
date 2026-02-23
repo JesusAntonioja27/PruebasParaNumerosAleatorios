@@ -28,4 +28,17 @@ public class CalculosEstadisticos {
         }
         return estadisticoC;
     }
+
+    // metodo sobrecargado para arreglo de FE (FE variables)
+    public static double calcularEstadisticoJiCuadrada(int[] frecuenciasObservadas, double[] frecuenciasEsperadas) {
+        double estadisticoC = 0;
+        for (int i = 0; i < frecuenciasObservadas.length; i++) {
+            if (frecuenciasEsperadas[i] == 0)
+                continue; // Evitar division por cero
+            double diferencia = frecuenciasObservadas[i] - frecuenciasEsperadas[i];
+            double diferenciaAlCuadrado = Math.pow(diferencia, 2);
+            estadisticoC = estadisticoC + (diferenciaAlCuadrado / frecuenciasEsperadas[i]);
+        }
+        return estadisticoC;
+    }
 }
