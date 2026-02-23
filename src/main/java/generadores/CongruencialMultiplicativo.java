@@ -11,6 +11,7 @@ public class CongruencialMultiplicativo {
         int pot = random.nextInt(3) + 6;
         long m = (long) Math.pow(2, pot);
 
+        // La constante 'a' debe ser a mod 8 = 3 o a mod 8 = 5
         long a;
         do {
             double valor = numeros.get(random.nextInt(numeros.size()));
@@ -23,14 +24,14 @@ public class CongruencialMultiplicativo {
             x0 = (long) (valor * 1000);
         } while (x0 % 2 == 0 || x0 < 0 || x0 >= m);
 
-        System.out.println("\n n \t Xn \t a * Xn\t \t (a * Xn) mod m");
-        System.out.println("[---------------------------------------------------------]");
+        System.out.println("\n n\tXn\ta * Xn\t\t(a * Xn) mod m");
+        System.out.println("---------------------------------------------------------");
 
         int n = 0;
         Long axn = a * x0;
         Long mod = axn % m;
 
-        System.out.println(n + "\t" + x0 + "\t" + axn + "\t\t\t " + mod);
+        System.out.println(n + "\t" + x0 + "\t" + axn + "\t\t" + mod);
 
         Long xn = mod;
         axn = a * xn;
@@ -44,7 +45,7 @@ public class CongruencialMultiplicativo {
             axn = a * xn;
             mod = axn % m;
             periodo++;
-            System.out.println(n + "\t" + xn + "\t" + axn + "\t\t\t " + mod);
+            System.out.println(n + "\t" + xn + "\t" + axn + "\t\t" + mod);
         }
 
         n++;
@@ -53,7 +54,8 @@ public class CongruencialMultiplicativo {
         mod = axn % m;
         periodo++;
 
-        System.out.println(n + "\t" + xn + "\t" + axn + "\t\t\t " + mod);
+        System.out.println(n + "\t" + xn + "\t" + axn + "\t\t" + mod);
+
         System.out.println("\nEl periodo es: " + periodo);
     }
 }

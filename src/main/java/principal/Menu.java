@@ -1,7 +1,6 @@
 package principal;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -171,7 +170,11 @@ public class Menu {
             return;
         }
 
-        double[] arreglo = numeros.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] arreglo = new double[numeros.size()];
+        for (int i = 0; i < numeros.size(); i++) {
+            arreglo[i] = numeros.get(i);
+        }
+
         PruebaJiCuadrado prueba = new PruebaJiCuadrado();
         System.out.println();
         prueba.ejecutarPrueba(arreglo);
@@ -188,10 +191,18 @@ public class Menu {
             return;
         }
 
-        double[] arreglo = numeros.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] arreglo = new double[numeros.size()];
+        for (int i = 0; i < numeros.size(); i++) {
+            arreglo[i] = numeros.get(i);
+        }
 
         System.out.print("\n  Ingrese el valor D critico: ");
         double dCritico = leerDouble();
+
+        if (dCritico <= 0) {
+            System.out.println("  Error: Valor no válido, prueba cancelada.");
+            return;
+        }
 
         String resultado = PruebaKolmogorovSmirnov.verificar(arreglo, dCritico);
         System.out.println("\n  Resultado: " + resultado);
@@ -224,7 +235,10 @@ public class Menu {
             return;
         }
 
-        double[] arreglo = numeros.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] arreglo = new double[numeros.size()];
+        for (int k = 0; k < numeros.size(); k++) {
+            arreglo[k] = numeros.get(k);
+        }
 
         System.out.print("\n  Ingrese alfa del intervalo: ");
         double alfa = leerDouble();
@@ -234,6 +248,11 @@ public class Menu {
         int nMax = leerEntero();
         System.out.print("  Ingrese X2 critico: ");
         double x2Critico = leerDouble();
+
+        if (nMax <= 0 || alfa < 0 || beta < alfa || x2Critico <= 0) {
+            System.out.println("  Error: Valores para la prueba no validos, cancelando.");
+            return;
+        }
 
         String resultado = PruebaDistancias.verificar(arreglo, alfa, beta, nMax, x2Critico);
         System.out.println("\n  Resultado: " + resultado);

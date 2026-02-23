@@ -8,6 +8,7 @@ public class CongruencialLineal {
     public void ejecutar(List<Double> numeros) {
         Random random = new Random();
 
+        // Buscamos un valor 'a' que cumpla: (a-1) mod 4 = 0
         long a;
         do {
             double valor = numeros.get(random.nextInt(numeros.size()));
@@ -29,14 +30,14 @@ public class CongruencialLineal {
             x0 = (long) (valor * 1000);
         } while (x0 < 0 || x0 >= m);
 
-        System.out.println("\n n \t Xn \t a * Xn + c\t \t (a * Xn + c) mod m");
-        System.out.println("[---------------------------------------------------------]");
+        System.out.println("\n n\tXn\ta * Xn + c\t(a * Xn + c) mod m");
+        System.out.println("---------------------------------------------------------");
 
         int n = 0;
         Long axnc = a * x0 + c;
         Long mod = axnc % m;
 
-        System.out.println(n + "\t" + x0 + "\t" + axnc + "\t\t\t " + mod);
+        System.out.println(n + "\t" + x0 + "\t" + axnc + "\t\t" + mod);
 
         Long xn = mod;
         axnc = a * xn + c;
@@ -50,7 +51,7 @@ public class CongruencialLineal {
             axnc = a * xn + c;
             mod = axnc % m;
             periodo++;
-            System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t\t " + mod);
+            System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t" + mod);
         }
 
         n++;
@@ -58,7 +59,7 @@ public class CongruencialLineal {
         axnc = a * xn + c;
         mod = axnc % m;
         periodo++;
-        System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t\t " + mod);
+        System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t" + mod);
 
         System.out.println("\nEl periodo es: " + periodo);
     }
