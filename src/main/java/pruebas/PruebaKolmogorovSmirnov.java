@@ -2,36 +2,42 @@ package pruebas;
 
 import java.util.Arrays;
 
-/**
- * 
- * Clase que ejecuta la prueba de uniformidad Kolmogorov-Smirnov.
- */
 public class PruebaKolmogorovSmirnov {
 
     public static String verificar(double[] u, double dCritico) {
         int n = u.length;
-
-        // Copiamos el arreglo para no modificar el original
         double[] sortedU = Arrays.copyOf(u, n);
-
-        // Paso 1: Ordenar la serie de menor a mayor
         Arrays.sort(sortedU);
 
-        // Paso 2: Calcular D = max|Ui - i/N|
+        System.out.println("--- Resultados para prueba de Kolmogorov-Smirnov ---");
+        System.out.println("Tamaño de muestra: " + n);
+        System.out.println();
+        System.out.printf("%-6s %-12s %-12s %-12s%n", "i", "Ui", "i/N", "|Ui - i/N|");
+        System.out.println("---------------------------------------------");
+
         double dMax = 0;
+        int posMax = 0;
         for (int i = 0; i < n; i++) {
             double fnI = (i + 1.0) / n;
             double diferencia = Math.abs(sortedU[i] - fnI);
+            System.out.printf("%-6d %-12.4f %-12.4f %-12.4f%n", (i + 1), sortedU[i], fnI, diferencia);
             if (diferencia > dMax) {
                 dMax = diferencia;
+                posMax = i + 1;
             }
         }
 
-        // Paso 4: Decisión
+        System.out.println("---------------------------------------------");
+        System.out.printf("D calculado (max): %.4f (en posicion %d)%n", dMax, posMax);
+        System.out.printf("D critico:         %.4f%n", dCritico);
+        System.out.println();
+
         if (dMax < dCritico) {
-            return "H0 ACEPTADA: distribución uniforme OK";
+            System.out.println("Aceptamos la hipotesis nula");
+            return "H0 ACEPTADA: distribucion uniforme OK";
         } else {
-            return "H0 RECHAZADA: no sigue distribución uniforme";
+            System.out.println("Rechazamos la hipotesis nula");
+            return "H0 RECHAZADA: no sigue distribucion uniforme";
         }
     }
 }

@@ -4,26 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * 
- * Clase que encapsula el algoritmo de Cuadrado Medio.
- */
 public class CuadradoMedio {
 
-    Scanner scanner = new Scanner(System.in);
-    long semilla;
+    private int periodo = 0;
 
-    public void cuadradoMedio() {
-        System.out.println("Método del Cuadrado Medio\n");
-        System.out.println("Ingrese la semilla: ");
-        semilla = scanner.nextLong();
+    public void ejecutar(Scanner scanner) {
+        System.out.println("Metodo del Cuadrado Medio\n");
+        System.out.print("Ingrese la semilla: ");
+        long semilla = scanner.nextLong();
         System.out.println();
         System.out.printf("%-6s %-12s %-18s %-18s %-12s %-12s%n", "n", "R(n)", "R(n)^2", "M.R(n)^2", "Val1", "Val2");
         System.out.println();
+        periodo = 0;
         cuadradoMedio(semilla, new ArrayList<>(), 0);
+        System.out.println("\nEl periodo es: " + periodo);
     }
 
-    public void cuadradoMedio(long semilla, List<Long> valores, int n) {
+    private void cuadradoMedio(long semilla, List<Long> valores, int n) {
         if (semilla == 0) {
             return;
         }
@@ -31,6 +28,8 @@ public class CuadradoMedio {
             return;
         }
         valores.add(semilla);
+        periodo++;
+
         int tamañoSemilla = ("" + semilla).length();
         long cuadrado = (long) semilla * semilla;
 

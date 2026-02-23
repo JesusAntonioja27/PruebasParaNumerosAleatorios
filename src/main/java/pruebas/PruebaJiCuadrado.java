@@ -2,11 +2,8 @@ package pruebas;
 
 import utilidades.CalculosEstadisticos;
 
-/**
- * Clase que ejecuta la prueba de uniformidad Ji-Cuadrada.
- */
 public class PruebaJiCuadrado {
-    // arreglo bidimencional predefinido
+
     double[][] tablaChi = {
             { 1, 3.841 }, { 2, 5.991 }, { 3, 7.815 }, { 4, 9.488 }, { 5, 11.070 },
             { 6, 12.592 }, { 7, 14.067 }, { 8, 15.507 }, { 9, 16.919 }, { 10, 18.307 },
@@ -20,11 +17,8 @@ public class PruebaJiCuadrado {
 
     public boolean ejecutarPrueba(double[] numerosAleatorios) {
         int n = numerosAleatorios.length;
-        // determinar numero de intervalos m, la reglaa comun es la raiz de N
         int m = (int) Math.sqrt(n);
-        // calcular frecuencias esperadas
         double frecuenciaEsperada = (double) n / m;
-        // calcular frecuencias observadas
         int[] frecuenciasObservadas = CalculosEstadisticos.calcularJiCuadrada(numerosAleatorios, m);
 
         double estadisticoCalculado = CalculosEstadisticos.calcularEstadisticoJiCuadrada(frecuenciasObservadas,
@@ -38,7 +32,6 @@ public class PruebaJiCuadrado {
             return false;
         }
 
-        // Imprimir
         System.out.println("--- Resultados para prueba de Ji cuadrada ---");
         System.out.println("Tamaño de muestra: " + n);
         System.out.println("Intervalos: " + m);
@@ -46,6 +39,7 @@ public class PruebaJiCuadrado {
         System.out.println("Frecuencia esperada: " + frecuenciaEsperada);
         System.out.println("Estadistico calculado: " + estadisticoCalculado);
         System.out.println("Valor critico de tabla: " + valorCriticoTabla);
+
         if (estadisticoCalculado <= valorCriticoTabla) {
             System.out.println("Aceptamos la hipotesis nula");
             return true;
@@ -58,8 +52,7 @@ public class PruebaJiCuadrado {
     private double buscarEnTabla(int valorBuscado) {
         for (int i = 0; i < tablaChi.length; i++) {
             if (tablaChi[i][0] == valorBuscado) {
-                double valorTabla = tablaChi[i][1];
-                return valorTabla;
+                return tablaChi[i][1];
             }
         }
         return -1;

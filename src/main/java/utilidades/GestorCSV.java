@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorCSV {
+
     public List<Double> leerNumeros(String rutaDeArchivo) {
         List<Double> datos = new ArrayList<>();
         boolean primeraLinea = true;
@@ -18,14 +19,12 @@ public class GestorCSV {
                 if (linea.isEmpty()) {
                     continue;
                 }
-
                 try {
                     linea = linea.replace(",", ".");
                     double numero = Double.parseDouble(linea);
                     datos.add(numero);
                 } catch (NumberFormatException e) {
-                    if (primeraLinea) {
-                    } else {
+                    if (!primeraLinea) {
                         System.err.println("No se pudo convertir a numero la linea: '" + linea + "'");
                     }
                 }
