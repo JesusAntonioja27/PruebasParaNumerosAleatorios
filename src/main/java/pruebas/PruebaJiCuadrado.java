@@ -38,7 +38,7 @@ public class PruebaJiCuadrado {
             return false;
         }
 
-        // Imprimir resultados para que el usuario los vea
+        // Imprimir
         System.out.println("--- Resultados para prueba de Ji cuadrada ---");
         System.out.println("Tamaño de muestra: " + n);
         System.out.println("Intervalos: " + m);
