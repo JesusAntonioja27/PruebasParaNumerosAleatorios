@@ -1,9 +1,9 @@
 package generadores;
 
+import utilidades.GestorCSV;
+import java.util.List;
 import java.util.Scanner;
-/*Los generadores congruenciales lineales generan una serie de números pseudo - aleatorios
- de tal forma que se puede generar el siguiente a partir del ultimo número derivado, 
- es decir, que el número Xn+1 es generado a partir de Xn.*/
+import java.util.Random;
 
 /**
  * Clase que encapsula el algoritmo Congruencial Lineal (Mixto).
@@ -15,24 +15,58 @@ public class CongruencialLineal {
         Scanner scanner = new Scanner(System.in);
         // Implementación del algoritmo
 
-        System.out.print("Ingresa la semilla: ");
-        int x0 = scanner.nextInt();
-        System.out.print("Ingresa el multiplicador: ");
-        int a = scanner.nextInt();
-        System.out.print("Ingresa la constante aditiva: ");
-        int c = scanner.nextInt();
-        System.out.print("Ingresa el módulo: ");
-        int m = scanner.nextInt();
+        /*
+         * System.out.print("Ingresa la semilla: ");
+         * int x0 = scanner.nextInt();
+         * System.out.print("Ingresa el multiplicador: ");
+         * int a = scanner.nextInt();
+         * System.out.print("Ingresa la constante aditiva: ");
+         * int c = scanner.nextInt();
+         * System.out.print("Ingresa el módulo: ");
+         * int m = scanner.nextInt();
+         */
+
+        GestorCSV gestor = new GestorCSV();
+
+        String ruta = "PruebasParaNumerosAleatorios/datosParaPruebas/datos.csv";
+
+        List<Double> numeros = gestor.leerNumeros(ruta);
+
+        Random random = new Random();
+
+        long a;
+        do {
+            double valor = numeros.get(random.nextInt(numeros.size()));
+            a = (long) (valor * 1000);
+
+        } while ((a - 1) % 4 != 0 || a <= 1);
+
+        long c;
+        do {
+            double cf = numeros.get(random.nextInt(numeros.size()));
+            c = (long) (cf * 1000);
+
+        } while (c % 2 == 0 || c == 0);
+
+        int pot = random.nextInt(3) + 6; // entre 2^5 y 2^8
+        long m = (long) Math.pow(2, pot);
+
+        long x0;
+        do {
+            double valor = numeros.get(random.nextInt(numeros.size()));
+            x0 = (long) (valor * 1000);
+
+        } while (x0 < 0 || x0 >= m);
 
         System.out.println("\n n \t Xn \t a * Xn + c\t \t (a * Xn + c) mod m");
         System.out.println("[---------------------------------------------------------]");
         int n = 0;
-        int axnc = a * x0 + c;
-        int mod = axnc % m;
+        Long axnc = a * x0 + c;
+        Long mod = axnc % m;
 
         System.out.println(n + "\t" + x0 + "\t" + axnc + "\t\t\t " + mod);
 
-        int xn = mod;
+        Long xn = mod;
         axnc = a * xn + c;
         mod = axnc % m;
 
