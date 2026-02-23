@@ -12,24 +12,30 @@ public class PruebaKolmogorovSmirnov {
         System.out.println("--- Resultados para prueba de Kolmogorov-Smirnov ---");
         System.out.println("Tamaño de muestra: " + n);
         System.out.println();
-        System.out.printf("%-6s %-12s %-12s %-12s%n", "i", "Ui", "i/N", "|Ui - i/N|");
-        System.out.println("---------------------------------------------");
+        System.out.println("i\tUi\t\ti/N\t\t|Ui - i/N|");
+        System.out.println("------------------------------------------------------");
 
         double dMax = 0;
         int posMax = 0;
         for (int i = 0; i < n; i++) {
             double fnI = (i + 1.0) / n;
             double diferencia = Math.abs(sortedU[i] - fnI);
-            System.out.printf("%-6d %-12.4f %-12.4f %-12.4f%n", (i + 1), sortedU[i], fnI, diferencia);
+
+            String uiStr = String.format("%.4f", sortedU[i]);
+            String fniStr = String.format("%.4f", fnI);
+            String difStr = String.format("%.4f", diferencia);
+
+            System.out.println((i + 1) + "\t" + uiStr + "\t\t" + fniStr + "\t\t" + difStr);
+
             if (diferencia > dMax) {
                 dMax = diferencia;
                 posMax = i + 1;
             }
         }
 
-        System.out.println("---------------------------------------------");
-        System.out.printf("D calculado (max): %.4f (en posicion %d)%n", dMax, posMax);
-        System.out.printf("D critico:         %.4f%n", dCritico);
+        System.out.println("------------------------------------------------------");
+        System.out.println("D calculado (max): " + String.format("%.4f", dMax) + " (en posicion " + posMax + ")");
+        System.out.println("D critico:         " + String.format("%.4f", dCritico));
         System.out.println();
 
         if (dMax < dCritico) {

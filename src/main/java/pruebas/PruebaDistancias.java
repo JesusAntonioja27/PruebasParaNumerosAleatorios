@@ -47,18 +47,25 @@ public class PruebaDistancias {
         System.out.println("Theta: " + theta);
         System.out.println("Total de huecos: " + totalHuecos);
         System.out.println();
-        System.out.printf("%-12s %-12s %-12s %-12s %-14s%n", "Distancia", "P[i]", "FO", "FE", "(FO-FE)^2/FE");
-        System.out.println("--------------------------------------------------------------");
+
+        System.out.println("Distancia\tP[i]\t\tFO\tFE\t\t(FO-FE)^2/FE");
+        System.out.println("----------------------------------------------------------------------");
 
         for (int i = 0; i <= nMax; i++) {
             String etiqueta = (i < nMax) ? String.valueOf(i) : i + "+";
             double parcial = (fe[i] == 0) ? 0 : Math.pow(o[i] - fe[i], 2) / fe[i];
-            System.out.printf("%-12s %-12.4f %-12d %-12.4f %-14.4f%n", etiqueta, p[i], o[i], fe[i], parcial);
+
+            // formateo simple
+            String pStr = String.format("%.4f", p[i]);
+            String feStr = String.format("%.4f", fe[i]);
+            String parStr = String.format("%.4f", parcial);
+
+            System.out.println(etiqueta + "\t\t" + pStr + "\t\t" + o[i] + "\t" + feStr + "\t\t" + parStr);
         }
 
-        System.out.println("--------------------------------------------------------------");
-        System.out.printf("X2 calculado: %.4f%n", x2);
-        System.out.printf("X2 critico:   %.4f%n", x2Critico);
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("X2 calculado: " + String.format("%.4f", x2));
+        System.out.println("X2 critico:   " + String.format("%.4f", x2Critico));
         System.out.println();
 
         if (x2 < x2Critico) {
