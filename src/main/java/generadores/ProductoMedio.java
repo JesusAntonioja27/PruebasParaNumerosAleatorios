@@ -15,8 +15,7 @@ public class ProductoMedio {
         System.out.print("Ingrese la segunda semilla: ");
         long semilla2 = scanner.nextLong();
         System.out.println();
-        System.out.printf("%-6s %-12s %-12s %-18s %-14s %-12s %-12s%n",
-                "n", "R(n)", "R(n+1)", "R(n)*R(n+1)", "M.R(n)", "Val1", "Val2");
+        System.out.println("n\tR(n)\tR(n+1)\tR(n)*R(n+1)\tM.R(n)\tVal1\tVal2");
         System.out.println();
         periodo = 0;
         productoMedio(semilla1, semilla2, new ArrayList<>(), 0);
@@ -50,8 +49,8 @@ public class ProductoMedio {
         }
 
         String medio = cadena.substring(principio, principio + 1 + tamañoSemilla);
-        System.out.printf("%-6d %-12d %-12d %-18s %-14s %-12d %-12d%n", n, semilla1, semilla2, cadena, medio,
-                val1, val2);
+        System.out.println(
+                n + "\t" + semilla1 + "\t" + semilla2 + "\t" + cadena + "\t" + medio + "\t" + val1 + "\t" + val2);
 
         productoMedio(semilla2, val1, valores, n + 1);
     }

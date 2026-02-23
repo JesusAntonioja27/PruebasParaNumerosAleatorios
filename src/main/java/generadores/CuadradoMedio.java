@@ -13,7 +13,7 @@ public class CuadradoMedio {
         System.out.print("Ingrese la semilla: ");
         long semilla = scanner.nextLong();
         System.out.println();
-        System.out.printf("%-6s %-12s %-18s %-18s %-12s %-12s%n", "n", "R(n)", "R(n)^2", "M.R(n)^2", "Val1", "Val2");
+        System.out.println("n\tR(n)\tR(n)^2\t\tM.R(n)^2\tVal1\tVal2");
         System.out.println();
         periodo = 0;
         cuadradoMedio(semilla, new ArrayList<>(), 0);
@@ -45,7 +45,7 @@ public class CuadradoMedio {
             val2 = Long.parseLong(cadena.substring(principio + 1, principio + 1 + tamañoSemilla));
         }
         String medio = cadena.substring(principio, principio + 1 + tamañoSemilla);
-        System.out.printf("%-6d %-12d %-18s %-18s %-12d %-12d%n", n, semilla, cadena, medio, val1, val2);
+        System.out.println(n + "\t" + semilla + "\t" + cadena + "\t\t" + medio + "\t\t" + val1 + "\t" + val2);
         cuadradoMedio(val1, valores, n + 1);
     }
 }
