@@ -2,6 +2,7 @@ package generadores;
 
 import utilidades.GestorCSV;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -25,23 +26,38 @@ public class CongruencialMultiplicativo {
 
         GestorCSV gestor = new GestorCSV();
 
-        String ruta = "datosParaPruebas/datos.csv";
+        String ruta = "PruebasParaNumerosAleatorios/datosParaPruebas/datos.csv";
 
         List<Double> numeros = gestor.leerNumeros(ruta);
 
-        double x0 = numeros.get(0);
-        double a = numeros.get(1);
-        double m = numeros.get(2);
+        Random random = new Random();
+
+        int pot = random.nextInt(3) + 6; // entre 2^5 y 2^8
+        long m = (long) Math.pow(2, pot);
+
+        long a;
+        do {
+            double valor = numeros.get(random.nextInt(numeros.size()));
+            a = (long) (valor * 1000);
+
+        } while (!(a % 8 == 3 || a % 8 == 5) || a <= 1 || a >= m);
+
+        long x0;
+        do {
+            double valor = numeros.get(random.nextInt(numeros.size()));
+            x0 = (long) (valor * 1000);
+
+        } while (x0 % 2 == 0 || x0 < 0 || x0 >= m);
 
         System.out.println("\n n \t Xn \t a * Xn\t \t (a * Xn) mod m");
         System.out.println("[---------------------------------------------------------]");
-        double n = 0;
-        double axn = a * x0;
-        double mod = axn % m;
+        int n = 0;
+        Long axn = a * x0;
+        Long mod = axn % m;
 
         System.out.println(n + "\t" + x0 + "\t" + axn + "\t\t\t " + mod);
 
-        double xn = mod;
+        Long xn = mod;
         axn = a * xn;
         mod = axn % m;
 
