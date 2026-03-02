@@ -4,54 +4,70 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase que encapsula el algoritmo de Producto Medio.
+ */
 public class ProductoMedio {
 
-    private int periodo = 0;
+    Scanner scanner = new Scanner(System.in);
+    long semilla1, semilla2;
 
-    public void ejecutar(Scanner scanner) {
-        System.out.println("Metodo del Producto Medio\n");
-        System.out.print("Ingrese la primera semilla: ");
-        long semilla1 = scanner.nextLong();
-        System.out.print("Ingrese la segunda semilla: ");
-        long semilla2 = scanner.nextLong();
+    public void productoMedio() {
+        System.out.println("Método del Producto Medio\n");
+        System.out.println("Ingrese la primera semilla: ");
+        semilla1 = scanner.nextLong();
+        System.out.println("Ingrese la segunda semilla: ");
+        semilla2 = scanner.nextLong();
+
+        if (String.valueOf(semilla1).length() != String.valueOf(semilla2).length()) {
+            System.out.println("Error: Las semillas deben tener el mismo número de dígitos.");
+            return;
+        }
+
         System.out.println();
-        System.out.println("n\tR(n)\tR(n+1)\tR(n)*R(n+1)\tM.R(n)\tVal1\tVal2");
+        System.out.printf("%-6s %-12s %-12s %-18s %-14s %-12s %-12s%n",
+                "n", "R(n)", "R(n+1)", "R(n)*R(n+1)", "M.R(n)", "Val1", "Val2");
         System.out.println();
-        periodo = 0;
-        productoMedio(semilla1, semilla2, new ArrayList<>(), 0);
-        System.out.println("\nEl periodo es: " + periodo);
+
+        int tamañoSemillaInicial = String.valueOf(semilla1).length();
+        productoMedio(semilla1, semilla2, new ArrayList<>(), 0, tamañoSemillaInicial);
     }
 
-    private void productoMedio(long semilla1, long semilla2, List<String> valores, int n) {
-        if (semilla1 == 0 || semilla2 == 0) {
-            return;
-        }
-
-        String multiplicacion = "" + semilla1 + semilla2;
-        if (valores.contains(multiplicacion)) {
-            return;
-        }
-        valores.add(multiplicacion);
-        periodo++;
-
-        int tamañoSemilla = ("" + semilla1).length();
+    private void productoMedio(long semilla1, long semilla2, List<String> multiplicaciones, int n,
+            int tamañoSemillaInicial) {
         long producto = semilla1 * semilla2;
 
-        String formato = "%0" + (2 * tamañoSemilla) + "d";
+        String formato = "%0" + (2 * tamañoSemillaInicial) + "d";
         String cadena = String.format(formato, producto);
         int tamaño = cadena.length();
-        int principio = (tamaño - tamañoSemilla) / 2;
-        long val1 = Long.parseLong(cadena.substring(principio, principio + tamañoSemilla));
-        long val2 = 0;
+        int principio = (tamaño - tamañoSemillaInicial) / 2;
 
-        if (principio + 1 + tamañoSemilla <= tamaño) {
-            val2 = Long.parseLong(cadena.substring(principio + 1, principio + 1 + tamañoSemilla));
+        long val1 = Long.parseLong(cadena.substring(principio, principio + tamañoSemillaInicial));
+        long val2 = 0;
+        if (principio + 1 + tamañoSemillaInicial <= tamaño) {
+            val2 = Long.parseLong(cadena.substring(principio + 1, principio + 1 + tamañoSemillaInicial));
         }
 
-        String medio = cadena.substring(principio, principio + 1 + tamañoSemilla);
-        System.out.println(
-                n + "\t" + semilla1 + "\t" + semilla2 + "\t" + cadena + "\t" + medio + "\t" + val1 + "\t" + val2);
+        String medio = cadena.substring(principio, principio + 1 + tamañoSemillaInicial);
+        System.out.printf("%-6d %-12d %-12d %-18s %-14s %-12d %-12d%n", n, semilla1, semilla2, cadena, medio, val1,
+                val2);
 
-        productoMedio(semilla2, val1, valores, n + 1);
+        long menor = Math.min(semilla1, semilla2);
+        long mayor = Math.max(semilla1, semilla2);
+        String claveMultiplicacion = menor + "x" + mayor;
+        if (multiplicaciones.contains(claveMultiplicacion)) {
+            return;
+        }
+        multiplicaciones.add(claveMultiplicacion);
+
+        long siguienteSemilla = val1;
+        if (String.valueOf(val1).length() < tamañoSemillaInicial) {
+            siguienteSemilla = val2;
+            if (String.valueOf(val2).length() < tamañoSemillaInicial) {
+                return;
+            }
+        }
+
+        productoMedio(semilla2, siguienteSemilla, multiplicaciones, n + 1, tamañoSemillaInicial);
     }
 }

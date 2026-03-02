@@ -71,13 +71,13 @@ public class Menu {
                 case 1:
                     System.out.println();
                     CuadradoMedio cm = new CuadradoMedio();
-                    cm.ejecutar(scanner);
+                    cm.cuadradoMedio();
                     pausar();
                     break;
                 case 2:
                     System.out.println();
                     ProductoMedio pm = new ProductoMedio();
-                    pm.ejecutar(scanner);
+                    pm.productoMedio();
                     pausar();
                     break;
                 case 3: {

@@ -16,24 +16,22 @@ public class PruebaDistancias {
 
         int[] o = new int[nMax + 1];
         int totalHuecos = 0;
-        boolean dentro = false;
         int hueco = 0;
 
         for (int j = 0; j < n; j++) {
             if (u[j] >= alfaInt && u[j] < betaInt) {
-                if (dentro) {
-                    int idx = Math.min(hueco, nMax);
-                    o[idx]++;
-                    totalHuecos++;
-                }
-                dentro = true;
+                int idx = Math.min(hueco, nMax);
+                o[idx]++;
+                totalHuecos++;
                 hueco = 0;
+
             } else {
-                if (dentro) {
-                    hueco++;
-                }
+                hueco++;
             }
         }
+        int idxFin = Math.min(hueco, nMax);
+        o[idxFin]++;
+        totalHuecos++;
 
         double[] fe = new double[nMax + 1];
         for (int i = 0; i <= nMax; i++) {
