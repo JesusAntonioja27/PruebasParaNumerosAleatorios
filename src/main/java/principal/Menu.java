@@ -80,34 +80,20 @@ public class Menu {
                     pm.productoMedio();
                     pausar();
                     break;
-                case 3: {
-                    String ruta = seleccionarCSV();
-                    if (ruta != null) {
-                        List<Double> numeros = gestorCSV.leerNumeros(ruta);
-                        if (!numeros.isEmpty()) {
-                            CongruencialLineal cl = new CongruencialLineal();
-                            cl.ejecutar(numeros);
-                        } else {
-                            System.out.println("  El archivo no tiene datos validos.");
-                        }
-                    }
+                case 3:
+                    System.out.println();
+                    CongruencialLineal cl = new CongruencialLineal();
+                    cl.congruenciaLineal();
                     pausar();
                     break;
-                }
-                case 4: {
-                    String ruta = seleccionarCSV();
-                    if (ruta != null) {
-                        List<Double> numeros = gestorCSV.leerNumeros(ruta);
-                        if (!numeros.isEmpty()) {
-                            CongruencialMultiplicativo cmu = new CongruencialMultiplicativo();
-                            cmu.ejecutar(numeros);
-                        } else {
-                            System.out.println("  El archivo no tiene datos validos.");
-                        }
-                    }
+
+                case 4:
+                    System.out.println();
+                    CongruencialMultiplicativo cmu = new CongruencialMultiplicativo();
+                    cmu.congruencialMultiplicativo();
                     pausar();
                     break;
-                }
+
                 case 5:
                     volver = true;
                     break;

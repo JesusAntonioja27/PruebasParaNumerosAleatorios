@@ -1,33 +1,37 @@
 package generadores;
 
-import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class CongruencialMultiplicativo {
 
-    public void ejecutar(List<Double> numeros) {
-        Random random = new Random();
+    public void congruencialMultiplicativo() {
+        Scanner scanner = new Scanner(System.in);
 
-        int pot = random.nextInt(3) + 6;
-        long m = (long) Math.pow(2, pot);
+        System.out.println("Ingrese un valor para m que sea potencia de 2: ");
+        long m = scanner.nextLong();
+        while ((m & (m - 1)) != 0 || m <= 1) {
+            System.out.println("Ingrese un valor para m que sea potencia de 2: ");
+            m = scanner.nextLong();
+        }
 
-        // La constante 'a' debe ser a mod 8 = 3 o a mod 8 = 5
-        long a;
-        do {
-            double valor = numeros.get(random.nextInt(numeros.size()));
-            a = (long) (valor * 1000);
-        } while (!(a % 8 == 3 || a % 8 == 5) || a <= 1 || a >= m);
+        System.out.println("Ingrese un valor para a: ");
+        long a = scanner.nextLong();
+        while (!(a % 8 == 3 || a % 8 == 5)) {
+            System.out.println("Ingrese un valor para a que sea multiplo de 8 mas 3 o 5: ");
+            a = scanner.nextLong();
+        }
 
-        long x0;
-        do {
-            double valor = numeros.get(random.nextInt(numeros.size()));
-            x0 = (long) (valor * 1000);
-        } while (x0 % 2 == 0 || x0 < 0 || x0 >= m);
+        System.out.println("Ingrese un valor para x0: ");
+        long x0 = scanner.nextLong();
+        while (x0 % 2 == 0 || x0 >= m) {
+            System.out.println("Ingrese un valor para x0 que sea impar y menor a m: ");
+            x0 = scanner.nextLong();
+        }
 
         System.out.println("\n n\tXn\ta * Xn\t\t(a * Xn) mod m");
         System.out.println("---------------------------------------------------------");
 
-        int n = 0;
+        int n = 1;
         Long axn = a * x0;
         Long mod = axn % m;
 

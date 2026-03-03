@@ -1,0 +1,280 @@
+﻿diff --git a/src/main/java/generadores/CongruencialLineal.java b/src/main/java/generadores/CongruencialLineal.java
+index 5fc8d71..43e9411 100644
+--- a/src/main/java/generadores/CongruencialLineal.java
++++ b/src/main/java/generadores/CongruencialLineal.java
+@@ -1,39 +1,47 @@
+ package generadores;
+ 
+-import java.util.List;
+-import java.util.Random;
++import java.util.Scanner;
+ 
+ public class CongruencialLineal {
+ 
+-    public void ejecutar(List<Double> numeros) {
+-        Random random = new Random();
++    public void congruenciaLineal() {
++        Scanner scanner = new Scanner(System.in);
+ 
+-        // Buscamos un valor 'a' que cumpla: (a-1) mod 4 = 0
+-        long a;
+-        do {
+-            double valor = numeros.get(random.nextInt(numeros.size()));
+-            a = (long) (valor * 1000);
+-        } while ((a - 1) % 4 != 0 || a <= 1);
++        System.out.println("Ingrese un valor para m que sea potencia de 2: ");
++        long m = scanner.nextLong();
++        while (m <= 0 || (m & (m - 1)) != 0) {
++            System.out.println("Ingrese un valor para m que sea potencia de 2: ");
++            m = scanner.nextLong();
++        }
++
++        System.out.println("Ingrese un valor para a: ");
++        long a = scanner.nextLong();
++
++        while ((a - 1) % 4 != 0) {
++            System.out.println("Ingrese un valor para a que sea multiplo de 4 mas 1: ");
++            a = scanner.nextLong();
++
++        }
+ 
+-        long c;
+-        do {
+-            double cf = numeros.get(random.nextInt(numeros.size()));
+-            c = (long) (cf * 1000);
+-        } while (c % 2 == 0 || c == 0);
++        System.out.println("Ingrese un valor para c: ");
++        long c = scanner.nextLong();
++        while (c % 2 == 0) {
++            System.out.println("Ingrese un valor para c que sea un n├║mero entero impar: ");
++            c = scanner.nextLong();
++        }
+ 
+-        int pot = random.nextInt(3) + 6;
+-        long m = (long) Math.pow(2, pot);
++        System.out.println("Ingrese un valor para x0: ");
++        long x0 = scanner.nextLong();
++        while (x0 >= m) {
++            System.out.println("Ingrese un valor para x0 que sea menor a m: ");
++            x0 = scanner.nextLong();
+ 
+-        long x0;
+-        do {
+-            double valor = numeros.get(random.nextInt(numeros.size()));
+-            x0 = (long) (valor * 1000);
+-        } while (x0 < 0 || x0 >= m);
++        }
+ 
+         System.out.println("\n n\tXn\ta * Xn + c\t(a * Xn + c) mod m");
+         System.out.println("---------------------------------------------------------");
+ 
+-        int n = 0;
++        int n = 1;
+         Long axnc = a * x0 + c;
+         Long mod = axnc % m;
+ 
+@@ -59,8 +67,9 @@ public class CongruencialLineal {
+         axnc = a * xn + c;
+         mod = axnc % m;
+         periodo++;
++
+         System.out.println(n + "\t" + xn + "\t" + axnc + "\t\t" + mod);
+ 
+         System.out.println("\nEl periodo es: " + periodo);
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/src/main/java/generadores/CongruencialMultiplicativo.java b/src/main/java/generadores/CongruencialMultiplicativo.java
+index 2fe47fb..6db484c 100644
+--- a/src/main/java/generadores/CongruencialMultiplicativo.java
++++ b/src/main/java/generadores/CongruencialMultiplicativo.java
+@@ -1,33 +1,37 @@
+ package generadores;
+ 
+-import java.util.List;
+-import java.util.Random;
++import java.util.Scanner;
+ 
+ public class CongruencialMultiplicativo {
+ 
+-    public void ejecutar(List<Double> numeros) {
+-        Random random = new Random();
++    public void congruencialMultiplicativo() {
++        Scanner scanner = new Scanner(System.in);
+ 
+-        int pot = random.nextInt(3) + 6;
+-        long m = (long) Math.pow(2, pot);
++        System.out.println("Ingrese un valor para m que sea potencia de 2: ");
++        long m = scanner.nextLong();
++        while ((m & (m - 1)) != 0 || m <= 1) {
++            System.out.println("Ingrese un valor para m que sea potencia de 2: ");
++            m = scanner.nextLong();
++        }
+ 
+-        // La constante 'a' debe ser a mod 8 = 3 o a mod 8 = 5
+-        long a;
+-        do {
+-            double valor = numeros.get(random.nextInt(numeros.size()));
+-            a = (long) (valor * 1000);
+-        } while (!(a % 8 == 3 || a % 8 == 5) || a <= 1 || a >= m);
++        System.out.println("Ingrese un valor para a: ");
++        long a = scanner.nextLong();
++        while (!(a % 8 == 3 || a % 8 == 5)) {
++            System.out.println("Ingrese un valor para a que sea multiplo de 8 mas 3 o 5: ");
++            a = scanner.nextLong();
++        }
+ 
+-        long x0;
+-        do {
+-            double valor = numeros.get(random.nextInt(numeros.size()));
+-            x0 = (long) (valor * 1000);
+-        } while (x0 % 2 == 0 || x0 < 0 || x0 >= m);
++        System.out.println("Ingrese un valor para x0: ");
++        long x0 = scanner.nextLong();
++        while (x0 % 2 == 0 || x0 >= m) {
++            System.out.println("Ingrese un valor para x0 que sea impar y menor a m: ");
++            x0 = scanner.nextLong();
++        }
+ 
+         System.out.println("\n n\tXn\ta * Xn\t\t(a * Xn) mod m");
+         System.out.println("---------------------------------------------------------");
+ 
+-        int n = 0;
++        int n = 1;
+         Long axn = a * x0;
+         Long mod = axn % m;
+ 
+@@ -58,4 +62,4 @@ public class CongruencialMultiplicativo {
+ 
+         System.out.println("\nEl periodo es: " + periodo);
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/src/main/java/principal/Menu.java b/src/main/java/principal/Menu.java
+index 9282f3b..7d69c9f 100644
+--- a/src/main/java/principal/Menu.java
++++ b/src/main/java/principal/Menu.java
+@@ -80,34 +80,20 @@ public class Menu {
+                     pm.productoMedio();
+                     pausar();
+                     break;
+-                case 3: {
+-                    String ruta = seleccionarCSV();
+-                    if (ruta != null) {
+-                        List<Double> numeros = gestorCSV.leerNumeros(ruta);
+-                        if (!numeros.isEmpty()) {
+-                            CongruencialLineal cl = new CongruencialLineal();
+-                            cl.ejecutar(numeros);
+-                        } else {
+-                            System.out.println("  El archivo no tiene datos validos.");
+-                        }
+-                    }
++                case 3:
++                    System.out.println();
++                    CongruencialLineal cl = new CongruencialLineal();
++                    cl.congruenciaLineal();
+                     pausar();
+                     break;
+-                }
+-                case 4: {
+-                    String ruta = seleccionarCSV();
+-                    if (ruta != null) {
+-                        List<Double> numeros = gestorCSV.leerNumeros(ruta);
+-                        if (!numeros.isEmpty()) {
+-                            CongruencialMultiplicativo cmu = new CongruencialMultiplicativo();
+-                            cmu.ejecutar(numeros);
+-                        } else {
+-                            System.out.println("  El archivo no tiene datos validos.");
+-                        }
+-                    }
++
++                case 4:
++                    System.out.println();
++                    CongruencialMultiplicativo cmu = new CongruencialMultiplicativo();
++                    cmu.congruencialMultiplicativo();
+                     pausar();
+                     break;
+-                }
++
+                 case 5:
+                     volver = true;
+                     break;
+@@ -306,4 +292,4 @@ public class Menu {
+         System.out.println("\n ENTER para continuar");
+         scanner.nextLine();
+     }
+-}
++}
+\ No newline at end of file
+diff --git a/src/main/java/pruebas/PruebaSeries.java b/src/main/java/pruebas/PruebaSeries.java
+index 5bd3b82..3687ed0 100644
+--- a/src/main/java/pruebas/PruebaSeries.java
++++ b/src/main/java/pruebas/PruebaSeries.java
+@@ -7,15 +7,15 @@ public class PruebaSeries {
+     public void ejecutar(List<Double> numeros) {
+ 
+         double[][] tablaChi = {
+-            { 1, 3.841 }, { 2, 5.991 }, { 3, 7.815 }, { 4, 9.488 }, { 5, 11.070 },
+-            { 6, 12.592 }, { 7, 14.067 }, { 8, 15.507 }, { 9, 16.919 }, { 10, 18.307 },
+-            { 11, 19.675 }, { 12, 21.026 }, { 13, 22.362 }, { 14, 23.685 }, { 15, 24.996 },
+-            { 16, 26.296 }, { 17, 27.587 }, { 18, 28.869 }, { 19, 30.144 }, { 20, 31.410 },
+-            { 21, 32.671 }, { 22, 33.924 }, { 23, 35.172 }, { 24, 36.415 }, { 25, 37.652 },
+-            { 26, 38.885 }, { 27, 40.113 }, { 28, 41.337 }, { 29, 42.557 }, { 30, 43.773 },
+-            { 31, 44.985 }, { 32, 46.194 }, { 33, 47.400 }, { 34, 48.602 }, { 35, 49.802 },
+-            { 40, 55.758 }, { 50, 67.500 }, { 60, 79.1 }, { 100, 124.3 }
+-    };
++                { 1, 3.841 }, { 2, 5.991 }, { 3, 7.815 }, { 4, 9.488 }, { 5, 11.070 },
++                { 6, 12.592 }, { 7, 14.067 }, { 8, 15.507 }, { 9, 16.919 }, { 10, 18.307 },
++                { 11, 19.675 }, { 12, 21.026 }, { 13, 22.362 }, { 14, 23.685 }, { 15, 24.996 },
++                { 16, 26.296 }, { 17, 27.587 }, { 18, 28.869 }, { 19, 30.144 }, { 20, 31.410 },
++                { 21, 32.671 }, { 22, 33.924 }, { 23, 35.172 }, { 24, 36.415 }, { 25, 37.652 },
++                { 26, 38.885 }, { 27, 40.113 }, { 28, 41.337 }, { 29, 42.557 }, { 30, 43.773 },
++                { 31, 44.985 }, { 32, 46.194 }, { 33, 47.400 }, { 34, 48.602 }, { 35, 49.802 },
++                { 40, 55.758 }, { 50, 67.500 }, { 60, 79.1 }, { 100, 124.3 }
++        };
+         int N = numeros.size();
+         int n = 4;
+         int[][] O = new int[n][n];
+@@ -23,7 +23,7 @@ public class PruebaSeries {
+         System.out.println("Pares \t Ui \t\tUi + 1 \n------------------------------");
+         for (int k = 0; k < N; k++) {
+             double u1 = numeros.get(k);
+-            double u2 = numeros.get((k + 1) % N); 
++            double u2 = numeros.get((k + 1) % N);
+ 
+             System.out.printf("%d \t %.4f \t%.4f%n", k + 1, u1, u2);
+ 
+@@ -37,7 +37,7 @@ public class PruebaSeries {
+ 
+             O[i][j]++;
+         }
+-        
++
+         System.out.println("------------------------------ \n\n");
+ 
+         double E = (double) N / (n * n);
+@@ -120,17 +120,15 @@ public class PruebaSeries {
+         double vc = 1;
+ 
+         for (int i = 0; i < tablaChi.length; i++) {
+-         if ((int) tablaChi[i][0] == sech) {
+-        vc = tablaChi[i][1];
+-        break;
+-         }
++            if ((int) tablaChi[i][0] == sech) {
++                vc = tablaChi[i][1];
++                break;
++            }
+         }
+ 
+         System.out.println("\n\nX2 calculado = " + ji + "\n");
+-        System.out.println("\n\nX2 critico = "+ vc + "," + n +"\n");
++        System.out.println("\n\nX2 critico = " + vc + "," + n + "\n");
+ 
+-        
+-        
+         if (ji < sech) {
+             System.out.println("Se acepta la hipotesis \n");
+         } else {
